@@ -59,7 +59,8 @@ class View (tk.Tk):
             frame.grid(row=0,column=0,sticky="nsew")
         # self.frames = StartPage(self.frameRandom, self)
         # self.frames = PageTwo(self.frameRandom, self)
-        self.showFrame(HomePage)
+        # self.showFrame(HomePage)
+        self.showFrame(PackPage)
 
     #variable Frames
     def showFrame(self, cont):
