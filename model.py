@@ -19,20 +19,46 @@ class Model():
 
     def getItemList(self):
         wrongDictionary = {"1" : "This is line One" , "2" : "This is line two", "3" : "doe", "oops" : "rey", "5" : "me"}
-        self.connect = pql.connect(SQL_HOST, SQL_USER, SQL_PASSWORD, SQL_DATABASE)
-        self.cursor = self.connect.cursor()
+        connect = pql.connect(SQL_HOST, SQL_USER, SQL_PASSWORD, SQL_DATABASE)
+        cursor = connect.cursor()
 
         # self.sqlQuery = "SELECT * from {table} WHERE BRAND = 'Gsi'".format(table=self.table)
-        self.sqlQuery = "SELECT * from {table}".format(table=self.table)
+        sqlQuery = "SELECT * from {table}".format(table=self.table)
 
-        self.cursor.execute(self.sqlQuery)
-        self.results = self.cursor.fetchall()
+        cursor.execute(sqlQuery)
+        results = cursor.fetchall()
 
         sqlDictionary = {}
-        for record in self.results:
+        for record in results:
             sqlDictionary[record[0]] = record[2]
             # print(record[2])
 
-        self.connect.close()
+        connect.close()
 
         return sqlDictionary
+
+    def getItemInfo(self, item):
+        sqlQuery = "SELECT * from {table} WHERE UNIQUE_ID = '{item}'".format(table=self.table, item=item)
+
+        connect = pql.connect(SQL_HOST, SQL_USER, SQL_PASSWORD, SQL_DATABASE)
+        cursor = connect.cursor()
+
+        cursor.execute(sqlQuery)
+        data = cursor.fetchone()
+
+        connect.close()
+        return data
+
+    def getItemAtributes(self, item):
+        data = ("Id", "Brand", "Item", "Weight in grams", "Notes")
+        # sqlQuery = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'weightsSloppyImport'".format(table=self.table, item=item)
+        #
+        # connect = pql.connect(SQL_HOST, SQL_USER, SQL_PASSWORD, SQL_DATABASE)
+        # cursor = connect.cursor()
+        #
+        # cursor.execute(sqlQuery)
+        # data = cursor.fetchone()
+        #
+        # connect.close()
+        # print(data)
+        return data
