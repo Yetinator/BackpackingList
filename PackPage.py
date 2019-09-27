@@ -9,97 +9,153 @@ class PackPage(tk.Frame):
         self.tkObj = tkObj
         self.parent = parent
         self.appController = appController
-        self.config(bg="teal", relief = tk.SUNKEN, bd = 2, padx = 3, pady = 3)
+        self.config(bg=BACKGROUND_COLOR_MAIN, relief = tk.SUNKEN, bd = 2, padx = 3, pady = 3)
 
         #Variables
         self.allItemList = self.appController.getItemList()
+        self.backpack = self.appController.getABackpack(0)
+        self.backpackItemList = []
         self.itemDescriptionBackpack = 2
         self.itemDescriptionInventory = 3
 
 
         #Make the frames
-        self.title = tk.Label(self, text = "PackPage", bg = TITLE_COLOR_MAIN)
-        self.itemsCurrentlyInBackpackFrame = tk.Frame(self, bg = CHECK_COLOR1)
-        self.itemDescriptionForBackpackSelectionFrame = tk.Frame(self, bg = CHECK_COLOR1)
-        self.itemDescriptionFrameInventory = tk.Frame(self, bg = CHECK_COLOR1)
-        self.itemInventoryFrame = tk.Frame(self, bg=CHECK_COLOR1)
+        self.title = tk.Label(self, text = "PackPage", bg = TITLE_COLOR_MAIN, height = 2, width = 16, font = ("Bold", 16))
+        self.frameBaseOne = tk.Frame(self, bg = CHECK_COLOR1)
+        self.frameBaseTwo = tk.Frame(self, bg = CHECK_COLOR1)
+        self.frameBaseThree = tk.Frame(self, bg = CHECK_COLOR1)
+        self.frameBaseFour = tk.Frame(self, bg=CHECK_COLOR1)
+
+        #Internal frames
+        self.contentFrame1 = tk.Frame(self.frameBaseOne, bg = CHECK_COLOR1)
+        self.contentFrame2 = tk.Frame(self.frameBaseTwo, bg = CHECK_COLOR1)
+        self.contentFrame3 = tk.Frame(self.frameBaseThree, bg = CHECK_COLOR1)
 
         #pack the frames
         self.title.pack()
-        self.itemsCurrentlyInBackpackFrame.pack(side=tk.LEFT)
-        self.itemDescriptionForBackpackSelectionFrame.pack(side=tk.LEFT)
-        self.itemInventoryFrame.pack(side=tk.RIGHT)
-        self.itemDescriptionFrameInventory.pack(side=tk.RIGHT)
+        self.frameBaseOne.pack(side=tk.LEFT)
+        self.frameBaseTwo.pack(side=tk.LEFT)
+        self.frameBaseFour.pack(side=tk.RIGHT)
+        self.frameBaseThree.pack(side=tk.RIGHT)
+
+        self.contentFrame1.pack(fill=tk.BOTH, expand=1)
+        self.contentFrame2.pack(fill=tk.BOTH, expand=1)
+        self.contentFrame3.pack(fill=tk.BOTH, expand=1)
 
         #backpack side
-        self.createPackedItemsFrame(self.itemsCurrentlyInBackpackFrame)
-        # self.createItemDescriptionFrame(self.itemDescriptionForBackpackSelectionFrame, self.itemDescriptionBackpack)
+        self.createPackedItemsFrame(self.contentFrame1)
+        # self.createItemDescriptionFrame(self.frameBaseTwo, self.itemDescriptionBackpack)
 
         #Inventory side
-        self.createItemDescriptionFrame(self.itemDescriptionFrameInventory, self.itemDescriptionInventory)
-        self.createPickItemFrame(self.itemInventoryFrame)
+        # self.createItemDescriptionFrame(self.frameBaseThree, self.itemDescriptionInventory)
+        self.createInventoryFrame(self.frameBaseFour)
+        self.refreshPickedItemsFrame()
 
+    #Initializer
+    def refreshPickedItemsFrame(self):
+        self.contentFrame3.pack_forget()
+        self.contentFrame3 = tk.Frame(self.frameBaseThree, bg = CHECK_COLOR1)
+        self.contentFrame3.pack(fill=tk.BOTH, expand=1)
+        self.createItemDescriptionFrame(self.contentFrame3, self.itemDescriptionInventory)
+
+        self.contentFrame2.pack_forget()
+        self.contentFrame2 = tk.Frame(self.frameBaseTwo, bg = CHECK_COLOR1)
+        self.contentFrame2.pack(fill=tk.BOTH, expand=1)
+        self.createBackpackDescriptionFrame(self.contentFrame2)
+        self.spacer = tk.Frame(self.contentFrame2, bg = BACKGROUND_COLOR_MAIN, height = 20).pack(fill=tk.X, expand=1)
+        self.createItemDescriptionFrame(self.contentFrame2, self.itemDescriptionBackpack)
+
+        self.contentFrame1.pack_forget()
+        self.contentFrame1 = tk.Frame(self.frameBaseOne, bg = CHECK_COLOR1)
+        self.contentFrame1.pack(fill=tk.BOTH, expand=1)
+        self.createPackedItemsFrame(self.contentFrame1)
 
     #Initializer
     def createPackedItemsFrame(self, container):
-        top = tk.Label(container, text="Packaged Items")
-        self.packedBox = tk.Listbox(container)
-        self.expandItemButton = tk.Button(container, text="Expand", command=self.expandItemButtonFunction)
-        self.changeItemSettingsButton = tk.Button(container, text="Change", command=self.changeItemSettingsButtonFunction)
+        top = tk.Label(container, text="Backpack", bg = TITLE_COLOR_MAIN)
+        self.packedBox = tk.Listbox(container, width=LISTBOX_WIDTH, height=LISTBOX_HEIGHT, bg = EXTRA_COLOR_2)
+        self.expandItemButton = tk.Button(container, text="Expand", bg = BUTTON_COLOR_MAIN)#, command=self.expandItemButtonFunction)
+        self.changeItemSettingsButton = tk.Button(container, text="Change", bg = BUTTON_COLOR_MAIN, command=self.changeItemSettingsButtonFunction)
 
-        top.pack()
+        for item in self.backpack.itemList:
+            self.packedBox.insert(tk.END, item)
+
+        top.pack(fill=tk.X, expand=1)
         self.packedBox.pack()
         self.expandItemButton.pack()
         self.changeItemSettingsButton.pack()
+
+        self.packedBox.bind("<Double-Button-1>", self.expandBackpackItemButtonFunction)
 
         #Initializer
     def createItemDescriptionFrame(self, container, selectedItem):
         #There are 2 frames that rely on this same function
         #This creates the item summary for the selected item
-        top = tk.Label(container, text = "Item Description")
+        top = tk.Label(container, text = "Item Description", bg = TITLE_COLOR_MAIN)
         item = self.appController.getItemById(selectedItem)
         messageBoxString = item.getLongDescription()
-        messageBox = tk.Message(container, text=messageBoxString, width=ITEM_DESCRIPTION_WIDTH)
-        top.pack()
+        messageBox = tk.Message(container, text=messageBoxString, bg = EXTRA_COLOR_1, width=ITEM_DESCRIPTION_WIDTH)
+        top.pack(fill=tk.X, expand=1)
         messageBox.pack()
 
+    def createBackpackDescriptionFrame(self, container):
+        #There are 2 frames that rely on this same function
+        #This creates the item summary for the selected item
+        top = tk.Label(container, text = "Backpack Summary", bg = TITLE_COLOR_MAIN)
+        messageBoxString = self.backpack.getLongDescription()
+        messageBox = tk.Message(container, text=messageBoxString, bg = EXTRA_COLOR_1, width=ITEM_DESCRIPTION_WIDTH)
+        top.pack(fill=tk.X, expand=1)
+        messageBox.pack(fill=tk.X, expand=1)
 
-    def createPickItemFrame(self, container):
+
+    def createInventoryFrame(self, container):
         #This is the right listbox
         #Items in inventory to be added to pack
-        top = tk.Label(container, text = "Pick Item to add")
+        top = tk.Label(container, text = "Inventory", bg = TITLE_COLOR_MAIN)
 
 
-        self.itemListBox = tk.Listbox(container)
+        self.itemListBox = tk.Listbox(container,width=LISTBOX_WIDTH, height = LISTBOX_HEIGHT, bg = EXTRA_COLOR_2)
         for item in self.allItemList:
-            # self.itemListBox.insert(tk.END, itemList[item])
-            # self.itemListBox.insert(tk.END, item.name)
-            print("this is item: " + str(item.name))
-            print("this is id: " + str(item.id))
             self.itemListBox.insert(tk.END, item)
 
         # messageBox = tk.Message(container, text=messageBoxString, width=ITEM_DESCRIPTION_WIDTH)
-        addItemButton = tk.Button(container, text = " << ", command=self.addItemButtonFunction)
+        addItemButton = tk.Button(container, text = " << ", bg = BUTTON_COLOR_MAIN, command=self.addItemButtonFunction)
         self.itemListBox.bind("<Double-Button-1>", self.expandItemButtonFunction)
 
-        top.pack()
+        top.pack(fill=tk.X, expand=1)
         self.itemListBox.pack()
         addItemButton.pack()
 
-    def expandItemButtonFunction(self,input):
+    def expandItemButtonFunction(self, widget):
         #This shows item settings or subcategories in adjacent box
         selection = self.itemListBox.curselection()
-        print("this is selection: " + str(selection) + "Of type: " + str(type(selection)))
-        print("allItemList comparison: " + str(self.allItemList[selection[0]]) + " " + str(self.allItemList[selection[0]].brand))
-        self.itemDescriptionBackpack = 2
         self.itemDescriptionInventory = self.allItemList[selection[0]].id
-        print("Expand Item")
-        self.createItemDescriptionFrame(self.itemDescriptionFrameInventory, self.itemDescriptionInventory)
-        print(str(self.itemDescriptionInventory))
+        self.refreshPickedItemsFrame()
+
+    def expandBackpackItemButtonFunction(self, widget):
+        selection = self.packedBox.curselection()
+        #pick the item out of the backpack to expand, as an id number
+        self.itemDescriptionBackpack = self.backpack.itemList[selection[0]].id
+        # self.backpackItemList[selection[0]].id
+        # self.allItemList[selection[0]].id
+        self.refreshPickedItemsFrame()
+
 
     def changeItemSettingsButtonFunction(self):
         #Does this belong here or in the expanded item?
         print("Change Item")
 
     def addItemButtonFunction(self):
+        #get the entry
+        selection = self.itemListBox.curselection()
+        uniqueId = self.allItemList[selection[0]].id
+        item = self.appController.getItemById(uniqueId)
+        #add to a list of items in the inventory
+        # self.backpackItemList.append(item)
+        self.backpack.addItem(item)
+        print("the item added will be: " + str(item))
+        #have list poplulate backpack
         print("Add item to backpack")
+        #refresh listbox
+        self.refreshPickedItemsFrame()
+        # self.packedBox.insert(tk.END, item)
