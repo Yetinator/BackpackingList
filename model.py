@@ -9,12 +9,14 @@ import itemClass
 import backpackClass
 from configurations import *
 from hiddenSettings import *
+import dao.BackpackDao as BackpackDao
 
 class Model():
 
     def __init__(self):
         self.table = 'weightsSloppyImport'
         self.allItems = []
+        self.backpackDao = BackpackDao.BackpackDao()
         #there is actually only one backpack unless the implementation gets weird
         self.backpack = []
         self.setItemList()
@@ -43,7 +45,8 @@ class Model():
     def setBackpackList(self):
         #later will call from sql and import appropriate backpacks or something
         #userid, backpackid
-        aBackpack = backpackClass.Backpack(1,1)
+        # aBackpack = backpackClass.Backpack(1,1)
+        aBackpack = self.backpackDao.findByUserIdAndBackpackId(0,0)
         self.backpack.append(aBackpack)
 
     def getItemById(self, id):

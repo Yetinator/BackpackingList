@@ -12,13 +12,25 @@ class Item():
         self.brand = brand
         self.name = name
         self.weightGrams = weightGrams
+        self.weightOzPart = 0
+        self.weightLbsPart = 0
+        self.GramsToOzDivisor = 28.35
+        self.weightImperialString =""
+        self.setLbsOzs()
         # self.wholeUnit =
         # self. contributerId =
         # self.modelYear =
         # self.weightOz =
         # self.picture_url =
         # self.timeStamp =
-        self.attributes = {"Id" : self.id, "brand" : self.brand, "name" : self.name, "Weight in Grams" : self.weightGrams}
+        self.attributes = {"Id" : self.id, "brand" : self.brand, "name" : self.name, "Weight in Grams" : self.weightGrams, "Lbs/Oz" : self.weightImperialString}
+
+    def setLbsOzs(self):
+        totalOz = round(self.weightGrams / self.GramsToOzDivisor, 1)
+        if (totalOz != 0):
+            self.weightOzPart = round(totalOz % 16, 1)
+            self.weightLbsPart = round(totalOz // 16, 0)
+        self.weightImperialString = str(self.weightLbsPart) + " Lbs and " + str(self.weightOzPart) + " Ozs"
 
     def __str__(self):
         return self.brand + " " + self.name
