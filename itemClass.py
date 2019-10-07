@@ -9,6 +9,7 @@ class Item():
     def __init__(self, id, brand, name, weightGrams):
         #U_ID	BRAND	NAME	WEIGHT_GRAMS	WHOLE_UNIT	CONTRIBUTER_ID	MODEL_YEAR	WEIGHT_OZ	PICTURE_URL	TIME_STAMP
         self.id = id
+        self.linkerId = False
         self.brand = brand
         self.name = name
         self.weightGrams = weightGrams
