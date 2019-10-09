@@ -76,14 +76,18 @@ class PackPage(tk.Frame):
         self.packedBox = tk.Listbox(container, width=LISTBOX_WIDTH, height=LISTBOX_HEIGHT, bg = EXTRA_COLOR_2)
         self.expandItemButton = tk.Button(container, text="Expand", bg = BUTTON_COLOR_MAIN)#, command=self.expandItemButtonFunction)
         self.changeItemSettingsButton = tk.Button(container, text="Change", bg = BUTTON_COLOR_MAIN, command=self.changeItemSettingsButtonFunction)
-
-        for item in self.backpack.itemList:
+        self.removeItemBackpackButton = tk.Button(container, text=">>", bg = BUTTON_COLOR_MAIN, command=self.removeItemBackpackFunction)
+        self.saveBackpackButton = tk.Button(container, text="Save Backpack", bg = BUTTON_COLOR_MAIN, command=self.saveBackpackFunction)
+        list =  self.backpack.getBackpackViewList()
+        for item in list:
             self.packedBox.insert(tk.END, item)
 
         top.pack(fill=tk.X, expand=1)
         self.packedBox.pack()
-        self.expandItemButton.pack()
-        self.changeItemSettingsButton.pack()
+        # self.expandItemButton.pack()
+        # self.changeItemSettingsButton.pack()
+        self.removeItemBackpackButton.pack()
+        self.saveBackpackButton.pack()
 
         self.packedBox.bind("<Double-Button-1>", self.expandBackpackItemButtonFunction)
 
@@ -135,10 +139,29 @@ class PackPage(tk.Frame):
     def expandBackpackItemButtonFunction(self, widget):
         selection = self.packedBox.curselection()
         #pick the item out of the backpack to expand, as an id number
-        self.itemDescriptionBackpack = self.backpack.itemList[selection[0]].id
+        self.itemDescriptionBackpack = self.backpack.getBackpackViewList()[selection[0]].id
         # self.backpackItemList[selection[0]].id
         # self.allItemList[selection[0]].id
         self.refreshPickedItemsFrame()
+
+    def removeItemBackpackFunction(self):
+        selection = self.packedBox.curselection()
+        print("removing item")
+        print(selection[0])
+
+        self.backpack.removeItemToTempUnsaved(selection[0])
+        self.refreshPickedItemsFrame()
+
+
+
+    def saveBackpackFunction(self):
+        #There are 2 ways to save a backpack:
+        # pass backpack items forward fromt the front end
+        # access the backpack from the controller
+        # self.appController.saveBackpack(self.backpack)
+        self.backpack.saveBackpackToDatabase()
+
+        # insertIntoBackpack(self,  userId, itemId, backpackId, pocketId)
 
 
     def changeItemSettingsButtonFunction(self):
@@ -152,7 +175,7 @@ class PackPage(tk.Frame):
         item = self.appController.getItemById(uniqueId)
         #add to a list of items in the inventory
         # self.backpackItemList.append(item)
-        self.backpack.addItem(item)
+        self.backpack.addUnsavedItemToTemp(item)
         print("the item added will be: " + str(item))
         #have list poplulate backpack
         print("Add item to backpack")
