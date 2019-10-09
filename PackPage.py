@@ -139,7 +139,7 @@ class PackPage(tk.Frame):
     def expandBackpackItemButtonFunction(self, widget):
         selection = self.packedBox.curselection()
         #pick the item out of the backpack to expand, as an id number
-        self.itemDescriptionBackpack = self.backpack.itemList[selection[0]].id
+        self.itemDescriptionBackpack = self.backpack.getBackpackViewList()[selection[0]].id
         # self.backpackItemList[selection[0]].id
         # self.allItemList[selection[0]].id
         self.refreshPickedItemsFrame()

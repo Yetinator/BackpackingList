@@ -55,7 +55,6 @@ class Backpack():
                 if (self.itemAddList[i].id == thisId):
                     self.itemAddList.pop(i)
                     break
-            
 
     def getBackpackViewList(self):
         #this returns a combined list of itemSQLDictionary, itemAddList, minus itemRemoveIdList to view by front end
