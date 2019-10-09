@@ -9,6 +9,10 @@ class Item():
     def __init__(self, id, brand, name, weightGrams):
         #U_ID	BRAND	NAME	WEIGHT_GRAMS	WHOLE_UNIT	CONTRIBUTER_ID	MODEL_YEAR	WEIGHT_OZ	PICTURE_URL	TIME_STAMP
         self.id = id
+        #linkerId is actually used by a backpack to associate it with the backpack.  If not an item in a backpack this should return false.
+        #Keep in mind an item, although identical in sql, is reconstructed for the backpack.  The linkerId is only updated in that instance
+        #of that item, not in the saved version
+        self.linkerId = False
         self.brand = brand
         self.name = name
         self.weightGrams = weightGrams

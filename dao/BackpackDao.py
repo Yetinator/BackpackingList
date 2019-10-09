@@ -30,10 +30,13 @@ class BackpackDao():
         theBackpack = backpackClass.Backpack(userId, backpackId)
 
         #add items to backpack
-
+        print("Add some results")
         for result in results:
+            linkerId = result[0]
+            print("the linkerId is: " + str(linkerId))
             item = self.itemDao.findById(result[2])
-            theBackpack.addItem(item)
+            theBackpack.addItemFromSQL(linkerId, item)
+
 
 
         return theBackpack
@@ -54,6 +57,7 @@ class BackpackDao():
         connect.close()
 
     def removeFromBackpack(self, entryId):
+        #make sure entryId is the UNIQUE_ID of the backpack entry row not of the item
         sqlQuery = "DELETE from {} WHERE UNIQUE_ID = {}".format(self.backpackTable, entryId)
 
         connect = pql.connect(SQL_HOST, SQL_USER, SQL_PASSWORD, SQL_DATABASE)
