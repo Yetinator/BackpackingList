@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Inventory Page</h1>
+
+<div>
+  <h2>Items</h2>
+  <form action="/additems">
+    {% for item in itemlist %}
+    <!-- <li></li> -->
+      <input type="checkbox" name = "item" value={{item.id}}>{{item}}<br>
+    {% endfor %}
+    <input type="submit"><br>
+
+  </form>
+</div>
+
+<div id="backpackSection">
+  <button></button>
+</div>
+
+<div id="backpackSection">
+</div>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+dark blue, almost cobalt - #063852
+#011A27 - A little Darker Blue
+
+#F0810F - orange/yellow used for text
+#E6DF44 - yellow text shadow
+
+Unknown, but used in prior
+
+#F0810F
+

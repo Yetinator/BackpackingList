@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Edit Backpack Page</h1>
+<div id="backpackSection">
+</div>
+
+<div id="backpackSection">
+  <h2>Backpack Content</h2>
+  <ol>
+    {% for item in itemlist %}
+    <!-- <li></li> -->
+      <li>{{item}}</li>
+    {% endfor %}
+
+  </ol>
+</div>
+
+<div class="buttonmenu">
+</div>
+
+<div id="backpackSection">
+</div>
+
+{% endblock %}

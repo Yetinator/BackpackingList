@@ -1,0 +1,189 @@
+h1, h2, h3, h4, h5, h6{
+	color: #F0810F;
+	//background: #063852;
+	display: block;
+	text-shadow: 3px 2px 3px #E6DF44;
+}
+a {
+	color: #F0810F;
+	/* background: #F0810F; */
+	/* text-shadow: 3px 2px 3px #E6DF44; */
+}
+a:link {
+  color: red;
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: #F0810F;
+}
+body{
+	background: #063852;
+}
+#mainMenu{
+	background: #011A27;
+	float: left;
+	width: 20%;
+	position: relative;
+	left: 10px;
+	border: 3px solid #73AD21;
+}
+#mainContent{
+	float: right;
+	width: 65%;
+	position: relative;
+	/* left: 10px; */
+	padding: 50px;
+  margin: 20px;
+	border: 3px solid #73AD21;
+}
+.buttonmenu{
+	background: #011A27;
+}
+
+#backpackSection{
+
+}
+#itemSection{
+
+}
+
+/* }
+input {
+	color:black;
+}
+.scheme-primary {
+    background-color: #063852;
+    color: #E6DF44;
+}
+.navbar-default, .navbar-default *{
+	background: #011A27;
+	color: #E6DF44;
+}
+.scrollable{
+	height:800px;
+	overflow:auto;
+}
+.btn-default {
+	background: #F0810F;
+}
+#inviteDisplay{
+	position:relative;
+	border-style: solid;
+	border-color: #011A27;
+	padding:10px;
+}
+#inv-header{
+	padding-left:10px;
+}
+#inv-body{
+	position:relative;
+}
+#inv-image{
+	margin-left:0 auto;
+
+	padding:10px;
+}
+#inv-info{
+
+	padding:10px;
+	position: absolute;
+	left:325px;
+	top:10px;
+
+
+	height: auto;
+    margin: 10px;
+    border: 3px solid #E6DF44;
+}
+#searchBox2{
+	color:black;
+	width: 400px;
+}
+#carousel-button-sequence{
+	padding:10px;
+	position: absolute;
+	left:400px;
+	top:300px;
+}
+.jumbotron{
+	background:grey;
+} */
+/*
+p {
+	background:#063852;
+	color:#E6DF44;
+
+}
+div {
+	background:#063852;
+	color:#E6DF44;
+}
+body {
+	border:5px #063852 solid;
+    display: block;
+    margin:auto;
+    background: #063852;
+    color: #E6DF44;
+}
+#navigation {
+	background: #011A27;
+	color: #E6DF44;
+	text-align: left;
+}
+#friendList {
+	width: 300px;
+    border: 10px solid #072D00;
+    padding: 25px;
+    margin: 25px;
+	vertical-align: top;
+    display: inline-block;
+
+	background: #063852;
+	color: black;
+	text-shadow: 3px 2px 3px #072D00;
+}
+#movieList {
+	width: 300px;
+    border: 10px solid #072D00;
+    padding: 25px;
+    margin: 25px;
+	vertical-align: top;
+    display: inline-block;
+
+	background: #063852;
+	color: black;
+	text-shadow: 3px 2px 3px #072D00;
+}
+.FromDatabase {
+	color: yellow;
+}
+button {
+	background: #F0810F;
+}
+.color1 {
+	background: #011A27;
+	color: #E6DF44;
+}
+a:link {
+
+    color:#F0810F;
+}
+a:visited {
+    text-decoration: none;
+    color:#F0810F;
+}
+a:hover {
+    color: red;
+}
+*/
