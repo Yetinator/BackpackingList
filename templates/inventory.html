@@ -1,25 +1,38 @@
 {% extends "base.html" %}
 
+
 {% block body %}
 <h1>Inventory Page</h1>
 
 <div>
   <h2>Items</h2>
-  <form action="/additems">
-    {% for item in itemlist %}
-    <!-- <li></li> -->
-      <input type="checkbox" name = "item" value={{item.id}}>{{item}}<br>
-    {% endfor %}
-    <input type="submit"><br>
 
+  <form action="/additems">
+    <table style="width:100%">
+      <tr>
+        <th>Select</th>
+        <th>Item Name</th>
+        <th>Item Brand</th>
+        <th>Item Weight</th>
+      </tr>
+      {% for item in itemlist %}
+        <tr>
+          <td><input type="checkbox" name = "item" value={{item.id}}></td>
+          <td>{{item.brand}}</td>
+          <td>{{item.name}}</td>
+          {% if webSettings.unitOfMeasure == "metric" %}
+            <td>{{item.weightGrams}} Grams</td>
+          {% else %}
+            <td>{{item.weightImperialString}}</td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+      <input type="submit"><br>
+
+    </table>
   </form>
 </div>
 
-<div id="backpackSection">
-  <button></button>
-</div>
 
-<div id="backpackSection">
-</div>
 
 {% endblock %}

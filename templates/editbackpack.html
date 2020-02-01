@@ -2,24 +2,26 @@
 
 {% block body %}
 <h1>Edit Backpack Page</h1>
-<div id="backpackSection">
+
+<div>
+  <!-- this is for backpack summary -->
+  <p>user is : {{backpack.userId}}</p>
+  <br>
+  <p>backpack is: {{backpack.backpackId}}</p>
+  <br>
+  {% if webSettings.unitOfMeasure == "metric" %}
+    Weight:  {{backpack.packWeightGrams}} grams<br>
+  {% else %}
+    Weight: {{backpack.packedWeightOunces}} ounces<br>
+  {% endif %}
+  <p>{{backpackView}}</p>
+
+
 </div>
 
-<div id="backpackSection">
-  <h2>Backpack Content</h2>
-  <ol>
-    {% for item in itemlist %}
-    <!-- <li></li> -->
-      <li>{{item}}</li>
-    {% endfor %}
 
-  </ol>
-</div>
+  {% include "extras.html" %}
 
-<div class="buttonmenu">
-</div>
 
-<div id="backpackSection">
-</div>
 
 {% endblock %}

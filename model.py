@@ -13,6 +13,10 @@ import dao.BackpackDao as BackpackDao
 import dao.ItemDao as ItemDao
 
 class Model():
+    #I don't recall why this model class exists.  I think I was trying to remove data referances from the front end in tkinter
+    #I'm not sure this has any application in web
+    #This does allow comparisons in tkinter later so I know what needs to be added.  tkinter is stupid or I can't use it.
+    #Todo - phase out model and use local backpack as a local copy for comparision with sql
 
     def __init__(self):
         # self.table = 'weightsSloppyImport'
@@ -31,22 +35,28 @@ class Model():
 
     #Initializer
     def setItemList(self):
+        print("Doing something in Model class.  Remove Model class.  ")
         #this is setting the non-backpack total list of everything for the front end.
         self.allItems = self.itemDao.findAll()
         return 0
 
     #Initializer
     def setBackpackList(self):
+        print("Doing something in Model class.  Remove Model class.  ")
         #create a backpack in the model for use elswhere
         aBackpack = self.backpackDao.findByUserIdAndBackpackId(0,0)
         self.backpack.append(aBackpack)
         return 0
 
     def getItemList(self):
+        print("Doing something in Model class.  Remove Model class.  ")
+        # print("possibly obsolete function getItemList in Model class")
         return self.backpack.getBackpackViewList()
 
     def saveBackpack(self, iValue):
         #compare dao backpack to local
+        print("possibly obsolete function saveBackpack in Model class this function does literally nothing")
+        print("Doing something in Model class.  Remove Model class.  ")
         pass
         # localBackpack = self.backpack[iValue]
         # sqlBackpack = self.backpackDao.findByUserIdAndBackpackId(localBackpack.userId, localBackpack.backpackId)

@@ -25,7 +25,13 @@ class Backpack():
 
         self.packWeightGrams = 0
         self.packedWeightOunces = 0
+        self.getDescriptionString = ""
+        # self.refresh()
         # self.attributes = {"Id" : self.id, "brand" : self.brand, "name" : self.name, "Weight in Grams" : self.weightGrams}
+
+    def refresh(self):
+        self.setTotalWeights
+        self.getLongDescription
 
     def addItemFromSQL(self, linkerId, item):
         item.linkerId = linkerId
@@ -57,29 +63,15 @@ class Backpack():
                     break
 
     def getBackpackViewList(self):
+        #Todo - relable this function getBackpackTkViewUnsavedLocalList
         #this returns a combined list of itemSQLDictionary, itemAddList, minus itemRemoveIdList to view by front end
         #this list will be ordered here in the same order it will display in the view.
-        # theItemList = []
-        # #start with SQL list and subtract the removed items
-        # for linkerId in self.itemSQLDictionary:
-        #     if linkerId not in self.itemRemoveIdList:
-        #         print(str(linkerId))
-        #         theItemList.append(self.itemSQLDictionary[linkerId])
-        #     else:
-        #         print("not adding " + str(self.itemSQLDictionary[linkerId]))
-        #
-        # #add items from add list
-        # for item in self.itemAddList:
-        #     theItemList.append(item)
-        #
-        # return theItemList
 
         theViewItemList = []
         #start with SQL list and subtract the removed items
         for item in self.itemSQLList:
             if item.linkerId not in self.itemRemoveIdList:
                 #some linkerIds will be False
-                print(str(item.linkerId))
                 theViewItemList.append(item)
             else:
                 print("not adding " + str(item))
@@ -127,4 +119,5 @@ class Backpack():
         messageBoxString += "Grams : {}".format(self.packWeightGrams)
         messageBoxString += ("\n")
         messageBoxString += "Lbs : {} and Oz : {}".format(str(round(self.packedWeightOunces//16,0)), str(round(self.packedWeightOunces%16, 1)))
+        self.getDescriptionString = messageBoxString
         return messageBoxString

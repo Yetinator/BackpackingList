@@ -2,6 +2,7 @@
 <head>
 <title>Backpacking Weights App</title>
 <link rel="stylesheet" href="/static/styles.css">
+<meta name="viewport" content="initial-scale=1, width=device-width">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
@@ -12,12 +13,18 @@
 <ol>
 <li><a href="/">Home</a></li>
 <li><a href="/fun">Fun</a></li>
+<li><a href="/settingspage">Settings</a></li>
+<li><a href="/newitem">New Item</a></li>
+<li><a href="/newitem?isThisASubitem=True&parentId=1">New Item (test)</a></li>
 <li><a href="/editbackpack">Edit Backpack</a></li>
 <li><a href="inventory">inventory</a></li>
-<li><a href="https://www.w3schools.com/html/">Visit our HTML tutorial</a></li>
-<li><a href="https://www.w3schools.com/html/">Visit our HTML tutorial</a></li>
 </ol>
+
+<!-- <img src="file:///var/www/html/bike.jpg" alt="backpack icon" style="width:128px;height:128px;"></img> -->
+<img src="file://../resources/bike.jpg" alt="backpack icon" style="width:128px;height:128px;"></img>
+
 </div>
+
 
 <div id="mainContent">
 {% block body %}{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+<h1>Settings Page</h1>
+
+<div>
+Hi Bro!
+</div>
+
+<form action="/settingsglobal">
+  <h3>Units</h3>
+  <input type="radio" name = "measurement" value="metric">Metric<br>
+  <input type="radio" name = "measurement" value="imperial">Imperial<br>
+  <br>
+  <button type="submit">submit</button>
+
+</form>
+<br>
+<hr>
+<h2>Search Settings</h2>
+<form action="/settingssearch" method="get">
+  <select name = "searchCategory">
+    <option value="brand">Brand</option>
+    <option value="itemName">Item Name</option>
+    <option value="pocket">Pocket</option>
+    <option value="tag">Tag</option>
+</select>
+<input type="text" name="q"></input>
+<br>
+<button type="submit">submit</button>
+</form>
+
+<br>
+<hr>
+
+
+
+{% endblock %}

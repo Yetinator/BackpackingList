@@ -1,0 +1,36 @@
+{% block itemForm %}
+<div>
+<form action="None">
+  <h3>Units</h3>
+  <input type="radio" name = "measurement" value="Metric">Metric<br>
+  <input type="radio" name = "measurement" value="Imperial">Imperial<br>
+  <br>
+  <!-- <h3>Search</h3>
+  <input type="text" name= "q"><br> -->
+  </form>
+  <form action={{thisRoute}} method="get">
+    <select name = "searchBar">
+      <option value="brand">Brand</option>
+      <option value="itemName">Item Name</option>
+      <option value="pocket">Pocket</option>
+      <option value="tag">Tag</option>
+    </select>
+
+  <input list={{searchBarSelection}}><br>
+  <datalist id={{searchBarSelection}}>
+      {% for item in itemlist %}
+        <option value={{item.brand}}>
+        <option value={{item.name}}>
+      {% endfor %}
+
+  </datalist>
+
+
+
+
+
+  <input type="submit"><br>
+
+</form>
+</div>
+{% endblock %}

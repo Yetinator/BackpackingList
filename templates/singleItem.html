@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+<h1>Item Page</h1>
+
+<div>
+  <h2>Item</h2>
+
+
+<p>
+          ID: {{item.id}} <br>
+          Brand: {{item.brand}} <br>
+          Name: {{item.name}} <br>
+          {% if webSettings.unitOfMeasure == "metric" %}
+          Weight:  {{item.weightGrams}} Grams
+          {% else %}
+          Weight:  {{item.weightImperialString}}
+          {% endif %}
+          <br><br><hr><br>
+          Subitems:
+          <br>
+          <hr>
+          {% for i in item.subItemList %}
+          ID: {{i.id}} <br>
+          Brand: {{i.brand}} <br>
+          Name: {{i.name}} <br>
+          {% if webSettings.unitOfMeasure == "metric" %}
+          Weight:  {{i.weightGrams}} Grams
+          {% else %}
+          Weight:  {{i.weightImperialString}}
+          {% endif %}
+          <br>
+          <hr>
+          {% endfor %}
+          <a href="/newitem?si=True&parentId={{item.id}}">New Item Under this item</a>
+
+</p>
+
+
+</div>
+
+
+
+{% endblock %}

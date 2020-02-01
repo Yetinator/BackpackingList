@@ -1,0 +1,35 @@
+
+
+{% block itemForm %}
+<div>
+<form action={{formAction}}>
+  <table style="width:100%">
+  <tr>
+    <th>Select</th>
+    <th>Item Brand</th>
+    <th>Item Name</th>
+    <th>Item Weight</th>
+  </tr>
+  {% for item in itemlist %}
+  <!-- <li></li> -->
+    <tr>
+      {% if item.linkerId == False %}
+      <td><input type="checkbox" name = "item" value={{item.id}}>false</td>
+      {% else %}
+      <td><input type="checkbox" name = "linkerId" value={{item.linkerId}}></td>
+      {% endif %}
+      <td>{{item.brand}}</td>
+      <td><a href="/singleitem?id={{item.id}}">{{item.name}}</a></td>
+      {% if webSettings.unitOfMeasure == "metric" %}
+        <td>{{item.weightGrams}}</td>
+      {% else %}
+        <td>{{item.weightImperialString}}</td>
+      {% endif %}
+    </tr>
+  {% endfor %}
+  </table>
+  <input type="submit"><br>
+
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+<h1>New Item Page</h1>
+
+
+<form action="/newitemsubmit">
+  <h3>Quick Settings</h3>
+  <input type="radio" name = "measurement" value="metric" checked>Metric<br>
+  <input type="radio" name = "measurement" value="imperial">Imperial<br>
+  <hr class="sectionBar">
+  <h3>New Item</h3>
+  <p class="quickTitle" >Weight: </p>
+  <input name="weight"></input>
+  <br>
+  <p class="quickTitle" >Brand: </p>
+  <input name="brand"></input>
+
+  <p class="quickTitle" >Item Name: </p>
+  <input name="itemName"></input>
+  <br>
+  <p class="quickTitle" >Pocket: </p>
+  <select name="pocketNumber">
+    <option value="0">None</option>
+    <option value="1">Pocket 1</option>
+    <option value="2">Pocket 2</option>
+    <option value="3">Pocket 3</option>
+    <option value="4">Pocket 4</option>
+    <option value="5">Pocket 5</option>
+    <option value="6">Pocket 6</option>
+    <option value="7">Pocket 7</option>
+  </select>
+  <br>
+
+  <hr class="sectionBar">
+  <p class="quickTitle" >sub-item: </p>
+  {% if isThisASubitem == True %}
+  <p>This will be a subitem of</p>
+  <input type="hidden" name = "isThisASubitem" value="True"></input>
+  <input type="hidden" name = "parentId" value={{parentItem.id}}></input>
+  <p class="quickTitle" >Parent item:  {{ parentItem }} </p>
+  <p class="quickTitle" >will there be another sub item for {{ parentItem }}</p>
+  <input type="radio" name = "willNextBeSubItem" value="True" checked>Yes<br>
+  <input type="radio" name = "willNextBeSubItem" value="False">No<br>
+  <br>
+  {% else %}
+  <p class="quickTitle" >Will there be a subitem</p>
+  <p>This will not be a sub-item</p>
+  <input type="hidden" name = "isThisASubitem" value="False"></input>
+  <input type="radio" name = "willNextBeSubItem" value="True">Yes<br>
+  <input type="radio" name = "willNextBeSubItem" value="False" checked>No<br>
+  {% endif %}
+  <hr class="sectionBar">
+
+  <button type="submit">submit</button>
+
+</form>
+<br>
+<!-- <h2>Search Settings</h2>
+<form action="/settingssearch" method="get">
+  <select name = "searchCategory">
+    <option value="brand">Brand</option>
+    <option value="itemName">Item Name</option>
+    <option value="pocket">Pocket</option>
+    <option value="tag">Tag</option>
+</select>
+<input type="text" name="q"></input>
+<br>
+<button type="submit">submit</button>
+</form> -->
+
+<br>
+
+
+
+{% endblock %}

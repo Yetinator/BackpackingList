@@ -4,7 +4,17 @@ dark blue, almost cobalt - #063852
 #F0810F - orange/yellow used for text
 #E6DF44 - yellow text shadow
 
+#73AD21 - green border
+
+
 Unknown, but used in prior
 
+day and night
+navy
+#011A27
+blueberry
+#063852
+tangerine
 #F0810F
-
+daffodil
+#E6DF44
